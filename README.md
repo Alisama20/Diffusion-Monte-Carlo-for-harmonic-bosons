@@ -1,6 +1,6 @@
 # Diffusion Monte Carlo for Interacting Bosons in a Harmonic Trap
 
-This project implements the **Diffusion Monte Carlo (DMC)** method to compute the ground state energy of a system of interacting bosons confined in a harmonic potential.
+This project implements the **Diffusion Monte Carlo (DMC)** method to compute the ground state energy of a system of interacting bosons confined in a harmonic potential. Potencial can be changed to anyone, this model is not suitable for potentials going to minus infinity.
 
 Two approaches are implemented:
 
@@ -13,7 +13,7 @@ The numerical results are compared with the **analytical solution** for the harm
 
 # Physical Model
 
-The system is described by the Hamiltonianç
+The system is described by the Hamiltonian
 
 $$
 \hat H = -\frac{1}{2} \sum_{k=1}^{N}\nabla^2_{r_k} + \frac{1}{2} \sum_{k=1}^{N} r_k^2 - \frac{\beta^2}{2N} \sum_{l>k} |r_k-r_l|^2
