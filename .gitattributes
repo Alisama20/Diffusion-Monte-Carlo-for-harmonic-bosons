@@ -1,0 +1,7 @@
+# Keep GitHub language stats focused on the actual implementation (Python).
+# Hide LaTeX sources, figures and bibliography from linguist.
+latex/**         linguist-documentation
+*.tex            linguist-documentation
+*.bib            linguist-documentation
+*.pdf            linguist-documentation
+figures/**       linguist-documentation
