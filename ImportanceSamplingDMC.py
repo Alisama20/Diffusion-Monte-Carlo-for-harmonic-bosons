@@ -229,6 +229,6 @@ if __name__ == "__main__":
         ax.legend(fontsize=9)
         ax.grid(True, linestyle=":", alpha=0.5)
         fig.tight_layout()
-        fig.savefig("is_dmc_convergence.png", dpi=150)
+        fig.savefig("figures/is_dmc_convergence.png", dpi=150)
         print("Plot saved -> is_dmc_convergence.png")
         plt.show()

@@ -35,76 +35,98 @@ $$
 
 ### Pure DMC — `PureDMC.py`
 
-The imaginary-time Schrödinger equation
-
-$$
-\frac{\partial\Psi}{\partial\tau} = -(\hat{H} - E_T)\,\Psi
-$$
-
-is simulated as a stochastic diffusion-and-branching process on a population of **walkers**.
-Each step consists of:
+The imaginary-time Schrödinger equation $\partial_\tau\Psi = -(\hat{H}-E_T)\Psi$ is
+simulated as a diffusion-and-branching process on a population of **walkers**:
 
 1. **Diffusion** — Gaussian displacement $\Delta\mathbf{r} \sim \mathcal{N}(0,\,dt)$
-2. **Branching** — walkers are replicated or removed with weight  
-   $w = \exp\!\left(-\tfrac{dt}{2}(V_\text{old}+V_\text{new}-2E_T)\right)$
-3. **Population control** — the reference energy $E_T$ is adjusted to keep the walker count near the target
+2. **Branching** — walkers replicated/removed with weight $e^{-\frac{dt}{2}(V_\text{old}+V_\text{new}-2E_T)}$
+3. **Population control** — $E_T$ adjusted to keep walker count near target
 
 ### Importance-Sampling DMC — `ImportanceSamplingDMC.py`
 
-A Gaussian trial wavefunction
+A Gaussian trial wavefunction $\Psi_T \propto e^{-\frac{\alpha}{2}\sum r_k^2}$,
+with $\alpha = \sqrt{1-\beta^2}$, guides the walkers via drift-diffusion:
 
-$$
-\Psi_T(\mathbf{r}) \propto \exp\!\left(-\frac{\alpha}{2}\sum_k r_k^2\right), \qquad \alpha = \sqrt{1-\beta^2}
-$$
+$$\mathbf{r} \leftarrow \mathbf{r} - \alpha\,\mathbf{r}\,dt + \boldsymbol{\xi}$$
 
-guides the walkers via a **drift-diffusion** update
-
-$$
-\mathbf{r} \leftarrow \mathbf{r} + \mathbf{F}\,dt + \boldsymbol{\xi}, \qquad \mathbf{F} = -\alpha\,\mathbf{r}
-$$
-
-and replaces the bare potential with the **local energy** estimator
-
-$$
-E_L = \Psi_T^{-1}\,\hat{H}\,\Psi_T
-$$
-
-which has lower variance near the exact ground state.
+Branching uses the **local energy** $E_L = \Psi_T^{-1}\hat{H}\Psi_T$ instead of the
+bare potential, which reduces variance significantly.
 
 ---
 
 ## Results
 
-Each script saves a convergence plot when executed:
+### Pure DMC — $E_0$ vs $\beta^2$
 
-| Script | Output plot |
-|--------|-------------|
-| `PureDMC.py` | `pure_dmc_convergence.png` |
-| `ImportanceSamplingDMC.py` | `is_dmc_convergence.png` |
+<p align="center">
+<img src="figures/E0DMCPuroN2.png"  width="45%">
+<img src="figures/E0DMCPuroN5.png"  width="45%">
+</p>
+<p align="center">
+<img src="figures/E0DMCPuroN10.png" width="45%">
+<img src="figures/E0DMCPuroN20.png" width="45%">
+</p>
 
-Each plot shows:
-- DMC energy per step (faint trace)
-- Running mean (solid line)
-- Exact value $E_0$ (dashed red line)
-- Final mean ± standard error (shaded band)
+Pure DMC agrees well with the exact solution for small $N$.
+For $N=20$ the error grows due to inefficient sampling of the larger configuration space.
 
-![Pure DMC convergence](pure_dmc_convergence.png)
-*Pure DMC — energy convergence (N=20, β²=0)*
+### Importance-Sampling DMC — $E_0$ vs $\beta^2$
 
-![IS-DMC convergence](is_dmc_convergence.png)
-*Importance-Sampling DMC — energy convergence (N=2, β²=0.4)*
+<p align="center">
+<img src="figures/E0DMCISN10.png"  width="45%">
+<img src="figures/E0DMCISN20.png"  width="45%">
+</p>
+<p align="center">
+<img src="figures/E0DMCISN50.png"  width="45%">
+<img src="figures/E0DMCISN100.png" width="45%">
+</p>
 
-Both methods reproduce the analytical ground-state energy.
-Importance sampling converges faster and with lower variance, especially as $N$ or $\beta^2$ increases.
+IS-DMC reproduces the analytical solution to high accuracy across the full range of
+$\beta^2$, even for $N=100$.
+
+---
+
+## Report
+
+The full academic report is available in two languages:
+
+| File | Description |
+|------|-------------|
+| [MemoryEN.pdf](MemoryEN.pdf) | English version — derivation of the DMC propagator, importance sampling, results |
+| [MemoriaES.pdf](MemoriaES.pdf) | Spanish version (original) |
+
+The LaTeX sources are in the [`latex/`](latex/) folder together with the bibliography.
+
+---
+
+## Repository Structure
+
+```
+.
+├── PureDMC.py                  # Pure DMC simulation
+├── ImportanceSamplingDMC.py    # IS-DMC simulation
+├── generate_plots.py           # Sweep beta^2 and reproduce result figures
+├── MemoryEN.pdf                # Academic report (English)
+├── MemoriaES.pdf               # Academic report (Spanish, original)
+├── latex/
+│   ├── MemoryEN.tex            # LaTeX source (English)
+│   ├── MemoriaES.tex           # LaTeX source (Spanish)
+│   └── bibliografiaDMC.bib     # Bibliography
+├── escudoUGRmonocromo.png      # UGR logo (required to compile .tex)
+├── figures/                    # All output figures
+│   ├── E0DMCPuroN{2,5,10,20}.png
+│   ├── E0DMCISN{2,5,10,20,50,100}.png
+│   ├── pure_dmc_convergence.png
+│   └── is_dmc_convergence.png
+└── LICENSE
+```
 
 ---
 
 ## Requirements
 
 ```
-numpy
-numba
-matplotlib
+numpy  numba  matplotlib
 ```
 
 ```bash
@@ -116,11 +138,12 @@ pip install numpy numba matplotlib
 ## Usage
 
 ```bash
-# Pure DMC
+# Single run — prints energy and saves convergence plot to figures/
 python PureDMC.py
-
-# Importance-Sampling DMC
 python ImportanceSamplingDMC.py
+
+# Full beta^2 sweep — reproduces the result figures
+python generate_plots.py
 ```
 
 Key parameters at the top of each file:
@@ -141,4 +164,5 @@ Key parameters at the top of each file:
 **A. S. Amari**
 
 Developed as part of the coursework for *Mathematical and Numerical Complements* —
-Master's Degree in Physics: Radiation, Nanotechnology, Particles and Astrophysics, University of Granada.
+Master's Degree in Physics: Radiation, Nanotechnology, Particles and Astrophysics,
+University of Granada.
