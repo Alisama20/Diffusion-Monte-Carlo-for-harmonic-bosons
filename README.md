@@ -103,17 +103,18 @@ The LaTeX sources are in the [`latex/`](latex/) folder together with the bibliog
 
 ```
 .
-├── PureDMC.py                  # Pure DMC simulation
-├── ImportanceSamplingDMC.py    # IS-DMC simulation
-├── generate_plots.py           # Sweep beta^2 and reproduce result figures
-├── MemoryEN.pdf                # Academic report (English)
-├── MemoriaES.pdf               # Academic report (Spanish, original)
+├── scripts/
+│   ├── PureDMC.py                 # Pure DMC simulation
+│   ├── ImportanceSamplingDMC.py   # IS-DMC simulation
+│   └── generate_plots.py          # Sweep beta^2 and reproduce result figures
+├── MemoryEN.pdf                   # Academic report (English)
+├── MemoriaES.pdf                  # Academic report (Spanish, original)
 ├── latex/
-│   ├── MemoryEN.tex            # LaTeX source (English)
-│   ├── MemoriaES.tex           # LaTeX source (Spanish)
-│   └── bibliografiaDMC.bib     # Bibliography
-├── escudoUGRmonocromo.png      # UGR logo (required to compile .tex)
-├── figures/                    # All output figures
+│   ├── MemoryEN.tex               # LaTeX source (English)
+│   ├── MemoriaES.tex              # LaTeX source (Spanish)
+│   ├── bibliografiaDMC.bib        # Bibliography
+│   └── escudoUGRmonocromo.png     # UGR logo (required to compile .tex)
+├── figures/                       # All output figures
 │   ├── E0DMCPuroN{2,5,10,20}.png
 │   ├── E0DMCISN{2,5,10,20,50,100}.png
 │   ├── pure_dmc_convergence.png
@@ -137,13 +138,16 @@ pip install numpy numba matplotlib
 
 ## Usage
 
+Run the scripts from the repository root so that the `figures/` output
+paths resolve correctly:
+
 ```bash
 # Single run — prints energy and saves convergence plot to figures/
-python PureDMC.py
-python ImportanceSamplingDMC.py
+python scripts/PureDMC.py
+python scripts/ImportanceSamplingDMC.py
 
 # Full beta^2 sweep — reproduces the result figures
-python generate_plots.py
+python scripts/generate_plots.py
 ```
 
 Key parameters at the top of each file:
@@ -161,7 +165,7 @@ Key parameters at the top of each file:
 
 ## Author
 
-**A. S. Amari**
+**A. S. Amari Rabah**
 
 Developed as part of the coursework for *Mathematical and Numerical Complements* —
 Master's Degree in Physics: Radiation, Nanotechnology, Particles and Astrophysics,
