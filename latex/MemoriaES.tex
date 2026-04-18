@@ -503,13 +503,13 @@ Surge de esta manera la necesidad de incorporar el \textit{importance sampling} 
     % Fila superior (0 grados)
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCPuroN2.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCPuroN2.png} \\[2pt]
         \small (a) $N = 2$.
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCPuroN5.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCPuroN5.png} \\[2pt]
         \small (b) $N = 5$. 
     \end{minipage}
 
@@ -518,13 +518,13 @@ Surge de esta manera la necesidad de incorporar el \textit{importance sampling} 
     % Fila inferior (10 grados)
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCPuroN10.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCPuroN10.png} \\[2pt]
         \small (c) $N = 10$.
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCPuroN20.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCPuroN20.png} \\[2pt]
         \small (d) $N = 20$.
     \end{minipage}
 
@@ -602,7 +602,7 @@ So observa que la energía local depende del parámetro $\alpha$,  que controla 
 \subsubsection{Resultados}
 
 
-En la figura \ref{figures/E0DMCIS} se muestran los resultados numéricos obtenidos mediante el método DMC con \textit{importance sampling} descrito en la sección \ref{IS} junto con la solución analítica dada por \ref{Eexact} para la energía del estado fundamental $E_0$ del hamiltoniano \ref{hamiltonianoatomoarmonico} para valores distintos del número de partículas.\\
+En la figura \ref{E0DMCIS} se muestran los resultados numéricos obtenidos mediante el método DMC con \textit{importance sampling} descrito en la sección \ref{IS} junto con la solución analítica dada por \ref{Eexact} para la energía del estado fundamental $E_0$ del hamiltoniano \ref{hamiltonianoatomoarmonico} para valores distintos del número de partículas.\\
 
 
 En este caso se observa que la coincidencia es total, incluso para valores elevados de $\beta^2$ y el número de partículas $N$. Se destaca especialmente el caso del número de partículas grande, ya que suponiendo una resolución equivalente con métodos deterministas muestreando $m$ puntos por dimensión el coste sería de $\mathcal{O}(m^{3N})$. Con un ejemplo modesto de 20 puntos por dimensión y 10 partículas se obtiene un coste de $20^{30} \sim 10^{39}$, aunque se realicen $10^{18}$ operaciones por segundo el tiempo restante sería mayor al del universo.
@@ -620,32 +620,32 @@ En este caso se observa que la coincidencia es total, incluso para valores eleva
     % Fila inferior (10 grados)
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCISN10.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCISN10.png} \\[2pt]
         \small (c) $N = 10$.
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCISN20.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCISN20.png} \\[2pt]
         \small (d) $N = 20$.
     \end{minipage}
 
     % Fila inferior (10 grados)
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCISN50.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCISN50.png} \\[2pt]
         \small (c) $N = 50$.
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth, height=5cm]{figures/E0DMCISN100.png} \\[2pt]
+        \includegraphics[width=\linewidth, height=5cm]{E0DMCISN100.png} \\[2pt]
         \small (d) $N = 100$.
     \end{minipage}
 
     \caption{Energía del estado fundamental en función de $\beta^2$ para distintos valores del número de partículas. En unidades atómicas, se toma una discretización $\Delta \tau = 0.001$, $10^4$ pasos de tiempo y una población objetivo de $2\cdot10^3$ caminantes. Tras inicializar el sistema la energía empieza a medirse después de $3\cdot10^3$ pasos de tiempo. Se han promediado los resultados sobre $10^3$ realizaciones.
     }
-    \label{figures/E0DMCIS}
+    \label{E0DMCIS}
 \end{figure}
 
 
