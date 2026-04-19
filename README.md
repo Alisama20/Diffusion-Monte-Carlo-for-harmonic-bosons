@@ -8,6 +8,44 @@ Two implementations are provided and compared against the analytical solution.
 
 ---
 
+## Repository Structure
+
+```
+.
+├── scripts/
+│   ├── PureDMC.py                 # Pure DMC simulation
+│   ├── ImportanceSamplingDMC.py   # IS-DMC simulation
+│   └── generate_plots.py          # Sweep beta^2 and reproduce result figures
+├── MemoryEN.pdf                   # Academic report (English)
+├── MemoriaES.pdf                  # Academic report (Spanish, original)
+├── latex/
+│   ├── MemoryEN.tex               # LaTeX source (English)
+│   ├── MemoriaES.tex              # LaTeX source (Spanish)
+│   ├── bibliografiaDMC.bib        # Bibliography
+│   └── escudoUGRmonocromo.png     # UGR logo (required to compile .tex)
+├── figures/                       # All output figures
+│   ├── E0DMCPuroN{2,5,10,20}.png
+│   ├── E0DMCISN{2,5,10,20,50,100}.png
+│   ├── pure_dmc_convergence.png
+│   └── is_dmc_convergence.png
+└── LICENSE
+```
+
+---
+
+## Report
+
+The full academic report is available in two languages:
+
+| File | Description |
+|------|-------------|
+| [MemoryEN.pdf](MemoryEN.pdf) | English version — derivation of the DMC propagator, importance sampling, convergence results |
+| [MemoriaES.pdf](MemoriaES.pdf) | Spanish version (original) |
+
+The LaTeX sources are in the [](latex/) folder together with the bibliography.
+
+---
+
 ## Physical Model
 
 The system is governed by the Hamiltonian
@@ -28,9 +66,7 @@ The **exact ground-state energy** is
 $$
 E_0 = \frac{3}{2}\left[1 + (N-1)\sqrt{1-\beta^2}\right]
 $$
-
 ---
-
 ## Methods
 
 ### Pure DMC — `PureDMC.py`
@@ -51,9 +87,7 @@ $$\mathbf{r} \leftarrow \mathbf{r} - \alpha\,\mathbf{r}\,dt + \boldsymbol{\xi}$$
 
 Branching uses the **local energy** $E_L = \Psi_T^{-1}\hat{H}\Psi_T$ instead of the
 bare potential, which reduces variance significantly.
-
 ---
-
 ## Results
 
 ### Pure DMC — $E_0$ vs $\beta^2$
@@ -83,47 +117,7 @@ For $N=20$ the error grows due to inefficient sampling of the larger configurati
 
 IS-DMC reproduces the analytical solution to high accuracy across the full range of
 $\beta^2$, even for $N=100$.
-
 ---
-
-## Report
-
-The full academic report is available in two languages:
-
-| File | Description |
-|------|-------------|
-| [MemoryEN.pdf](MemoryEN.pdf) | English version — derivation of the DMC propagator, importance sampling, results |
-| [MemoriaES.pdf](MemoriaES.pdf) | Spanish version (original) |
-
-The LaTeX sources are in the [`latex/`](latex/) folder together with the bibliography.
-
----
-
-## Repository Structure
-
-```
-.
-├── scripts/
-│   ├── PureDMC.py                 # Pure DMC simulation
-│   ├── ImportanceSamplingDMC.py   # IS-DMC simulation
-│   └── generate_plots.py          # Sweep beta^2 and reproduce result figures
-├── MemoryEN.pdf                   # Academic report (English)
-├── MemoriaES.pdf                  # Academic report (Spanish, original)
-├── latex/
-│   ├── MemoryEN.tex               # LaTeX source (English)
-│   ├── MemoriaES.tex              # LaTeX source (Spanish)
-│   ├── bibliografiaDMC.bib        # Bibliography
-│   └── escudoUGRmonocromo.png     # UGR logo (required to compile .tex)
-├── figures/                       # All output figures
-│   ├── E0DMCPuroN{2,5,10,20}.png
-│   ├── E0DMCISN{2,5,10,20,50,100}.png
-│   ├── pure_dmc_convergence.png
-│   └── is_dmc_convergence.png
-└── LICENSE
-```
-
----
-
 ## Requirements
 
 ```
@@ -133,9 +127,7 @@ numpy  numba  matplotlib
 ```bash
 pip install numpy numba matplotlib
 ```
-
 ---
-
 ## Usage
 
 Run the scripts from the repository root so that the `figures/` output
@@ -160,9 +152,7 @@ Key parameters at the top of each file:
 | `DT`         | time step |
 | `NSTEPS`     | total DMC steps |
 | `NTHERM`     | thermalisation steps (excluded from averages) |
-
 ---
-
 ## Author
 
 **A. S. Amari Rabah**
